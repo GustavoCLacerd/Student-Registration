@@ -1,0 +1,22 @@
+Sub AbreForm()
+    Form_Cadastro.Show
+End Sub
+
+Sub Pesquisa_Aluno()
+    Dim pesquisa As String
+    pesquisa = InputBox("Informe o nome ou RGM do Aluno(a):", "PESQUISAR")
+
+    ' indica o onde será realizada a pesquisa
+    With Worksheets("Cadastro").Range("A:B")
+
+        ' criando o objeto busca
+        Set busca = .Find(pesquisa, LookIn:=xlValues)
+
+        If Not busca Is Nothing Then
+            Worksheets("Cadastro").Activate
+            Range(busca.Address).Activate
+        Else
+            MsgBox "Nenhum Registro Encontrado", vbInformation, "PESQUISA"
+        End If
+    End With
+End Sub

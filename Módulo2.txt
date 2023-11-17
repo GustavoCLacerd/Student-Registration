@@ -1,0 +1,27 @@
+Sub Organizar_Dados()
+'
+' Organizar_Dados Macro
+'
+
+'
+    Range("A2:F2").Select
+    Selection.Copy
+    Range("A3:F23").Select
+    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Columns("A:F").Select
+    Application.CutCopyMode = False
+    ActiveWorkbook.Worksheets("Cadastro").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("Cadastro").Sort.SortFields.Add2 Key:=Range( _
+        "A2:A32"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("Cadastro").Sort
+        .SetRange Range("A1:F32")
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    Range("H12").Select
+    End With
+End Sub
